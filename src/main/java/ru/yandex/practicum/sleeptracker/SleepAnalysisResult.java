@@ -1,6 +1,6 @@
 package ru.yandex.practicum.sleeptracker;
 
-public class SleepAnalysisResult <T> {
+public class SleepAnalysisResult<T> {
     private T result;
     private String description;
 
@@ -13,7 +13,7 @@ public class SleepAnalysisResult <T> {
         return result;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 }
