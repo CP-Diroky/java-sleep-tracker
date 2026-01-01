@@ -8,7 +8,9 @@ import ru.yandex.practicum.sleeptracker.SleepingSession;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.function.Function;
+
 // Функция для определения типа пользователя
+
 public class SleepType implements Function<List<SleepingSession>, String> {
 
     private String sleepingType;

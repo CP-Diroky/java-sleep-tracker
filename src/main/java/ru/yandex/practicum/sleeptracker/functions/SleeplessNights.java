@@ -17,6 +17,7 @@ import java.util.stream.IntStream;
     При этом считаем, что пользователь носит часы не снимая — то есть не было сессий сна, которые не попали бы в файл."
     Если принять данное допущение, то получается что человек не спал с 12.10.25 по 30.10.25, что выглядит нереально :)
  */
+
 public class SleeplessNights implements Function<List<SleepingSession>, Integer> {
 
     private SleepAnalysisResult result;

@@ -5,7 +5,9 @@ import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
 import java.util.function.Function;
+
 // Функция для расчета количества сессий с плохим качеством сна
+
 public class BadAmountOfSleep implements Function<List<SleepingSession>, Integer> {
 
     private SleepAnalysisResult result;

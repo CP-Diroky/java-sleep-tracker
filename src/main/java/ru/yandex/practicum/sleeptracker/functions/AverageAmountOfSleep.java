@@ -5,7 +5,9 @@ import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
 import java.util.function.Function;
+
 // Функция для расчета средней продолжительности сессии (в минутах)
+
 public class AverageAmountOfSleep implements Function<List<SleepingSession>, Long> {
 
     private SleepAnalysisResult result;

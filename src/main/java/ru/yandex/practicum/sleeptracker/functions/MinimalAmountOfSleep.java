@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.function.Function;
 
 // Функция для расчета минимальной продолжительности сна(в минутах)
+
 public class MinimalAmountOfSleep implements Function<List<SleepingSession>, Long> {
 
     private SleepAnalysisResult result;
@@ -14,8 +15,8 @@ public class MinimalAmountOfSleep implements Function<List<SleepingSession>, Lon
 
     @Override
     public Long apply(List<SleepingSession> sessions) {
-        minAmountOfSleep = sessions.stream().
-                min((session1, session2) -> (int) session1.getSleepInMinutes() -
+        minAmountOfSleep = sessions.stream()
+                .min((session1, session2) -> (int) session1.getSleepInMinutes() -
                         (int) session2.getSleepInMinutes()).get().getSleepInMinutes();
         result = new SleepAnalysisResult<>(minAmountOfSleep,
                 "Минимальная продолжительность сессии (в минутах):");

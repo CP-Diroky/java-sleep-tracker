@@ -7,11 +7,11 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class SleepingSession {
-    private  String[] array;
-    private  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
-    private  LocalDateTime sleepTime;
-    private  LocalDateTime wakeUpTime;
-    private  Duration sleep;
+    private String[] array;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
+    private LocalDateTime sleepTime;
+    private LocalDateTime wakeUpTime;
+    private Duration sleep;
 
 
     public SleepingSession(String session) {
@@ -21,7 +21,7 @@ public class SleepingSession {
         sleep = Duration.between(sleepTime, wakeUpTime);
     }
 
-    public String getQualityOfSleep(){
+    public String getQualityOfSleep() {
         return array[2];
     }
 
@@ -36,7 +36,6 @@ public class SleepingSession {
     public LocalDateTime getWakeUpTime() {
         return wakeUpTime;
     }
-
 
 
     @Override

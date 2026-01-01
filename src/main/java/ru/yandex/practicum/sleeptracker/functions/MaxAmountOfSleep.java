@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.function.Function;
 
 // Функция для расчета максимальной продолжительности сна (в минутах)
+
 public class MaxAmountOfSleep implements Function<List<SleepingSession>, Long> {
     private SleepAnalysisResult result;
     private long maxAmountOfSleep;
 
     @Override
     public Long apply(List<SleepingSession> sessions) {
-        maxAmountOfSleep = sessions.stream().
-                max((session1, session2) -> (int) session1.getSleepInMinutes() -
+        maxAmountOfSleep = sessions.stream()
+                .max((session1, session2) -> (int) session1.getSleepInMinutes() -
                         (int) session2.getSleepInMinutes()).get().getSleepInMinutes();
         result = new SleepAnalysisResult<>(maxAmountOfSleep,
                 "Максимальная продолжительность сессии (в минутах):");

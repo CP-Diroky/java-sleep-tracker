@@ -5,7 +5,9 @@ import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
 import java.util.function.Function;
+
 // Функция для расчета количества всех сессий сна
+
 public class CountOfSleepingSessions implements Function<List<SleepingSession>, Integer> {
 
     private SleepAnalysisResult result;
