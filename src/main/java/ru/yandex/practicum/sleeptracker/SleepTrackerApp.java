@@ -7,7 +7,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 
 public class SleepTrackerApp {
@@ -15,12 +14,17 @@ public class SleepTrackerApp {
 
     public static void main(String[] args) {
         // считываем файл log.txt
+        if (args.length == 0) {
+            System.out.println("Укажите путь к файлу с логом сна в аргументах запуска.");
+            return;
+        }
+        String logFilePath = args[0];
         try (BufferedReader bufferedReader = new BufferedReader(
-                new FileReader("src/main/resources/sleep_log.txt", StandardCharsets.UTF_8))) {
+                new FileReader(logFilePath, StandardCharsets.UTF_8))) {
             final List<SleepingSession> sessions = bufferedReader.lines()
                     .map(session -> new SleepingSession(session)).toList();
             // Добавляем функции в лист functions и вызываем их
-            List<Function> functions = new ArrayList<>();
+            List<SleepingResultFunction> functions = new ArrayList<>();
             functions.add(new AverageAmountOfSleep());
             functions.add(new BadAmountOfSleep());
             functions.add(new CountOfSleepingSessions());
@@ -28,7 +32,10 @@ public class SleepTrackerApp {
             functions.add(new MinimalAmountOfSleep());
             functions.add(new SleeplessNights());
             functions.add(new SleepType());
-            functions.stream().peek(function -> function.apply(sessions)).toList();
+            functions.stream().peek(function -> {
+                function.apply(sessions);
+                System.out.println(function.getResult());
+            }).toList();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

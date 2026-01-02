@@ -6,8 +6,10 @@ import ru.yandex.practicum.sleeptracker.SleepingSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,7 +20,7 @@ import java.util.stream.IntStream;
     Если принять данное допущение, то получается что человек не спал с 12.10.25 по 30.10.25, что выглядит нереально :)
  */
 
-public class SleeplessNights implements Function<List<SleepingSession>, Integer> {
+public class SleeplessNights implements SleepingResultFunction<List<SleepingSession>, Integer> {
 
     private SleepAnalysisResult result;
     private int amountOfSleeplessNights;
@@ -52,16 +54,16 @@ public class SleeplessNights implements Function<List<SleepingSession>, Integer>
                 .filter(diff -> diff > 0)
                 .sum();
         result = new SleepAnalysisResult<>(amountOfSleeplessNights,
-                "Количество бессонных ночей:");
-        printResult();
+                "Количество бессонных ночей");
         return amountOfSleeplessNights;
     }
 
-    public void printResult() {
+    @Override
+    public String getResult() {
         if (result == null) {
-            System.out.println("Вызовите сперва метод!");
+            return "Вызовите метод!";
         } else {
-            System.out.println(result.getDescription() + " " + result.getResult());
+            return result.toString();
         }
     }
 }

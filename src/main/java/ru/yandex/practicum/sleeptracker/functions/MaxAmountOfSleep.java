@@ -4,11 +4,10 @@ import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
-import java.util.function.Function;
 
 // Функция для расчета максимальной продолжительности сна (в минутах)
 
-public class MaxAmountOfSleep implements Function<List<SleepingSession>, Long> {
+public class MaxAmountOfSleep implements SleepingResultFunction<List<SleepingSession>, Long> {
     private SleepAnalysisResult result;
     private long maxAmountOfSleep;
 
@@ -18,16 +17,16 @@ public class MaxAmountOfSleep implements Function<List<SleepingSession>, Long> {
                 .max((session1, session2) -> (int) session1.getSleepInMinutes() -
                         (int) session2.getSleepInMinutes()).get().getSleepInMinutes();
         result = new SleepAnalysisResult<>(maxAmountOfSleep,
-                "Максимальная продолжительность сессии (в минутах):");
-        printResult();
+                "Максимальная продолжительность сессии (в минутах)");
         return (Long) result.getResult();
     }
 
-    public void printResult() {
+    @Override
+    public String getResult() {
         if (result == null) {
-            System.out.println("Вызовите сперва метод!");
+            return "Вызовите метод!";
         } else {
-            System.out.println(result.getDescription() + " " + result.getResult());
+            return result.toString();
         }
     }
 }

@@ -4,11 +4,10 @@ import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
-import java.util.function.Function;
 
 // Функция для расчета средней продолжительности сессии (в минутах)
 
-public class AverageAmountOfSleep implements Function<List<SleepingSession>, Long> {
+public class AverageAmountOfSleep implements SleepingResultFunction<List<SleepingSession>, Long> {
 
     private SleepAnalysisResult result;
     private long averageAmountOfSleep;
@@ -18,17 +17,16 @@ public class AverageAmountOfSleep implements Function<List<SleepingSession>, Lon
         long sumAmountOfSleep = sessions.stream().mapToLong(session -> session.getSleepInMinutes()).sum();
         averageAmountOfSleep = sumAmountOfSleep / sessions.size();
         result = new SleepAnalysisResult<>(averageAmountOfSleep,
-                "Cредняя продолжительность сессии (в минутах):");
-        printResult();
+                "Cредняя продолжительность сессии (в минутах)");
         return (Long) result.getResult();
     }
 
-
-    public void printResult() {
+    @Override
+    public String getResult() {
         if (result == null) {
-            System.out.println("Вызовите сперва метод!");
+            return "Вызовите метод!";
         } else {
-            System.out.println(result.getDescription() + " " + result.getResult());
+            return result.toString();
         }
     }
 }

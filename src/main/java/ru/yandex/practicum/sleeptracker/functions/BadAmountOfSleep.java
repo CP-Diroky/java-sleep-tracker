@@ -4,11 +4,10 @@ import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
-import java.util.function.Function;
 
 // Функция для расчета количества сессий с плохим качеством сна
 
-public class BadAmountOfSleep implements Function<List<SleepingSession>, Integer> {
+public class BadAmountOfSleep implements SleepingResultFunction<List<SleepingSession>, Integer> {
 
     private SleepAnalysisResult result;
     private int amountOfBadSleeps;
@@ -18,17 +17,16 @@ public class BadAmountOfSleep implements Function<List<SleepingSession>, Integer
         List<SleepingSession> badSessions = sessions.stream()
                 .filter(session -> session.getQualityOfSleep().equals("BAD")).toList();
         amountOfBadSleeps = badSessions.size();
-        result = new SleepAnalysisResult<>(amountOfBadSleeps, "Количество сессий с плохим качество сна:");
-        printResult();
+        result = new SleepAnalysisResult<>(amountOfBadSleeps, "Количество сессий с плохим качество сна");
         return (int) result.getResult();
     }
 
-
-    public void printResult() {
+    @Override
+    public String getResult() {
         if (result == null) {
-            System.out.println("Вызовите сперва метод!");
+            return "Вызовите метод!";
         } else {
-            System.out.println(result.getDescription() + " " + result.getResult());
+            return result.toString();
         }
     }
 }

@@ -4,11 +4,10 @@ import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
-import java.util.function.Function;
 
 // Функция для расчета минимальной продолжительности сна(в минутах)
 
-public class MinimalAmountOfSleep implements Function<List<SleepingSession>, Long> {
+public class MinimalAmountOfSleep implements SleepingResultFunction<List<SleepingSession>, Long> {
 
     private SleepAnalysisResult result;
     private long minAmountOfSleep;
@@ -19,17 +18,17 @@ public class MinimalAmountOfSleep implements Function<List<SleepingSession>, Lon
                 .min((session1, session2) -> (int) session1.getSleepInMinutes() -
                         (int) session2.getSleepInMinutes()).get().getSleepInMinutes();
         result = new SleepAnalysisResult<>(minAmountOfSleep,
-                "Минимальная продолжительность сессии (в минутах):");
-        printResult();
+                "Минимальная продолжительность сессии (в минутах)");
         return (Long) result.getResult();
     }
 
 
-    public void printResult() {
+    @Override
+    public String getResult() {
         if (result == null) {
-            System.out.println("Вызовите сперва метод!");
+            return "Вызовите метод!";
         } else {
-            System.out.println(result.getDescription() + " " + result.getResult());
+            return result.toString();
         }
     }
 }

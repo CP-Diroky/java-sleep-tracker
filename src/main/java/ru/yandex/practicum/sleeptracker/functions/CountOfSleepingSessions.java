@@ -4,27 +4,26 @@ import ru.yandex.practicum.sleeptracker.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.SleepingSession;
 
 import java.util.List;
-import java.util.function.Function;
 
 // Функция для расчета количества всех сессий сна
 
-public class CountOfSleepingSessions implements Function<List<SleepingSession>, Integer> {
+public class CountOfSleepingSessions implements SleepingResultFunction<List<SleepingSession>, Integer> {
 
     private SleepAnalysisResult result;
 
     @Override
     public Integer apply(List<SleepingSession> sessions) {
-        result = new SleepAnalysisResult<>(sessions.size(), "Количество сессий сна:");
-        printResult();
+        result = new SleepAnalysisResult<>(sessions.size(), "Количество сессий сна");
         return (Integer) result.getResult();
     }
 
 
-    public void printResult() {
+    @Override
+    public String getResult() {
         if (result == null) {
-            System.out.println("Вызовите сперва метод!");
+            return "Вызовите метод!";
         } else {
-            System.out.println(result.getDescription() + " " + result.getResult());
+            return result.toString();
         }
     }
 }
